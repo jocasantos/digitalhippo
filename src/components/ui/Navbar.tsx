@@ -3,8 +3,9 @@ import MaxWidthWrapper from "../MaxWidthWrapper";
 import { Icons } from "./Icons";
 import NavItems from "../NavItems";
 import { buttonVariants } from "./button";
+import Cart from "../Cart";
 
-function Navbar() {
+export default function Navbar() {
   const user = null;
 
   return (
@@ -79,5 +80,3 @@ function Navbar() {
     </div>
   );
 }
-
-export default Navbar;
