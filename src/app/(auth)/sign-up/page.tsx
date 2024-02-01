@@ -4,16 +4,16 @@ import { Icons } from "@/components/ui/Icons";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import { Label } from "@radix-ui/react-label";
-import { ArrowRight } from "lucide-react";
-import Link from "next/link";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import {
   AuthCredentialsValidator,
   TAuthCredentialsValidator,
 } from "@/lib/validators/account-credentials-validator";
+import { trpc } from "@/trpc/client";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Label } from "@radix-ui/react-label";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { useForm } from "react-hook-form";
 
 export default function Page() {
   const {
@@ -23,6 +23,8 @@ export default function Page() {
   } = useForm<TAuthCredentialsValidator>({
     resolver: zodResolver(AuthCredentialsValidator),
   });
+
+  const { data } = trpc.anyApiRoute.useQuery();
 
   function onSubmit({ email, password }: TAuthCredentialsValidator) {
     // send data to the server
